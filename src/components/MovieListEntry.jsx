@@ -14,7 +14,7 @@ const MovieListEntry = (props) => (
 // <div className="movie-list-entry-detail">{props.movie.snippet.description}</div>
 
 MovieListEntry.propTypes = {
-  movies: React.PropTypes.string.isRequired
+  movie: React.PropTypes.object.isRequired
 };
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope.
