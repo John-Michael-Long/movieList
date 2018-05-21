@@ -2,30 +2,35 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieList: this.props.movies,
+      movieListDisplay: this.props.movies,
       inputString: '',
       searchString: ''
     }
   }
 
-  handleSearchClick(event){
-    this.setState({
-      searchString: this.state.inputString
-    })
-    console.log('searchString:', this.state.searchString)
-    var displayMovieList;
+  filterList() {
+    let temp = []
+    for (let i = 0; i < this.props.movies.length; i++) {
 
-    for (let movie in this.props.movies) {
-      
-      console.log('movie: ', movie)
-      if ( movie.title.includes(this.state.searchString)) {
-        displayMovieList.push(movie)
+      let movie = this.props.movies[i]
+      if ( movie.title.includes(this.state.searchString) ) {
+
+        temp.push(movie)
+      }
+
+      if(temp.length === 0) {
+        temp.push({title: "no movie by that name found"});
       }
     }
+    return temp;
+  };
+
+  handleSearchClick(event){
     this.setState({
-      movieList: displayMovieList
+      searchString: this.state.inputString,
+      movieListDisplay: this.filterList()
     })
-    console.log(this.state.movieList)
+    
   }
 
   handleTextChange(event) {
@@ -34,7 +39,6 @@ class App extends React.Component {
     });
     console.log('inputString Change:', this.state.inputString)
   }
-
 
 
   render(){
@@ -49,7 +53,7 @@ class App extends React.Component {
           </div>
         </nav>
           <div className = "movieListClass">
-            <MovieList movies={this.props.movies} />
+            <MovieList movies={this.state.movieListDisplay} />
           </div>
       </center>
     )
