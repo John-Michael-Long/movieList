@@ -40,11 +40,19 @@ class App extends React.Component {
     console.log('inputString Change:', this.state.inputString)
   }
 
+  handleSubmitClick(event){
+    console.log('click!!!!')
+  }
+
 
   render(){
     return (
       <center>
         <nav className="navbar">
+          <div>
+            <EnterMovie
+            onEntryClick={this.handleSubmitClick.bind(this)}/>
+          </div>
           <div className="col-md-6 offset-md-3"> 
             <Search 
             onSearchClick={this.handleSearchClick.bind(this)} 
